@@ -1,10 +1,13 @@
 
 //dichiaro varibili
-var mina;
+var mina, input, punteggio = 0;
 var mine = [];
+var inseriti = [];
 var bool = false;
-var i = 0;
+var bool1 = false; 
+var bool2 = false;
 
+console.log(bool, bool1, bool2);
 // Function da riutilizzare
 function randomGenerator(){
   return Math.floor(Math.random() * (100 + 1 - 1) + 1);
@@ -24,9 +27,8 @@ function ricerca(arr, elem){
 
 // costruisco array di mine e controllo che tutte abbiano un numero diverso
 while (mine.length <= 15){
-    bool= false;
+    bool = false;
     mina = randomGenerator();
-    console.log('Il numero generato è ' + mina);
 
     bool = ricerca(mine, mina);
 
@@ -36,20 +38,29 @@ while (mine.length <= 15){
   }
 // Fine Costruzione array
 
-var bool1 = false;
-var input;
-var x = 0;
-
+console.log('sono arrivato');
 // Input Utente e controllo esistenza in mine
-while (bool1 === false && x <= 3){
+while (bool1 === false && punteggio < 84){
   input = parseInt(prompt('Inserisci un numero fra 1 e 100'));
 
-  bool1 = ricerca(mine, input);
+  // Controllo se l'utente ha inserito più di una volta lo stesso numero
+  bool2 = ricerca(inseriti, input);
 
-  if(bool1 !== false){
-    alert('Hai perso!!');
+  if (bool2){
+    alert('hai già inserito il numero ' + input);
   } else {
-    alert('Sei ancora salvo!!!');
+    // creazione array degli input dell'utente
+    inseriti.push(input);
+
+    // controllo se l'imput coincide con la mina
+    bool1 = ricerca(mine, input);
+
+
+    if(bool1 !== false){
+      alert('Hai perso! Il tuo punteggio è ' + (punteggio + 1));
+    } else {
+      alert('Sei ancora salvo!!!');
+    }
+    punteggio++;
   }
-  x++;
 }

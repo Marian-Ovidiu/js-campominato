@@ -5,45 +5,51 @@ var mine = [];
 var bool = false;
 var i = 0;
 
+// Function da riutilizzare
 function randomGenerator(){
   return Math.floor(Math.random() * (100 + 1 - 1) + 1);
 }
-mina = randomGenerator();
-mine.push(mina)
 
-// costruisco array di mine e controllo che tutte abbiano un numoer diverso
-while (mine.length < 16){
+function ricerca(arr, elem){
+  var bool = false;
+  for (var j = 0; j <= arr.length; j++){
+    if(arr[j] === elem){
+      bool = true;
+      break;
+    }
+  }
+  return bool;
+}
+// Fine function
+
+// costruisco array di mine e controllo che tutte abbiano un numero diverso
+while (mine.length <= 15){
+    bool= false;
     mina = randomGenerator();
     console.log('Il numero generato è ' + mina);
 
-    for(var j = 0; j <= mine.length; j++){
-      if(mine[j] === mina){
-        bool = true;
-      }
-    }
+    bool = ricerca(mine, mina);
 
     if(bool === false){
       mine.push(mina);
     }
-
-}
-console.log(mina);
+  }
+// Fine Costruzione array
 
 var bool1 = false;
-var imput;
+var input;
 var x = 0;
 
-while (bool1 = false || x <= 84){
-  imput = prompt('Inserisci un numero fra 1 e 100');
-  for(var y = 0; y < mine.length; y++){
-    if(mine[y] === imput){
-      bool1 = true;
-    }
-  }
-  if(bool === false){
-    alert('Sei ancora salvo!!');
+// Input Utente e controllo esistenza in mine
+while (bool1 === false && x <= 3){
+  input = parseInt(prompt('Inserisci un numero fra 1 e 100'));
+
+  bool1 = ricerca(mine, input);
+
+  if(bool1 !== false){
+    alert('Hai perso!!');
   } else {
-    alert('Hai perso!!!');
+    alert('Sei ancora salvo!!!');
   }
-  x++
+  x++;
 }

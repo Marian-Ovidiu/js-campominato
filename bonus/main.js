@@ -1,4 +1,3 @@
-//dichiaro varibili
 var mina, input, range;
 var punteggio = 0;
 var mine = [];
@@ -51,8 +50,8 @@ while (bool1 === false && punteggio < (range - 16)){
     // Controllo che l'utente abbia inserito il numero entro il range del livello selezionato
     if(input < 1 || input > (range - 16)){
       alert('Devi inserire un numero compreso fa 1 e ' + range);
-    } else if(input === ''){
-      alert('devi inserire almeno un numero');
+    } else if(input.length === undefined || input.length === null){
+      alert('devi inserire almeno un numero')
     } else {
       // Controllo se l'utente ha inserito più di una volta lo stesso numero
       bool2 = ricerca(inseriti, input);
